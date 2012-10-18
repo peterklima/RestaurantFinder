@@ -14,6 +14,16 @@
 
 		<h:outputLabel for="name" value="Name:"></h:outputLabel>
 		<h:inputText id="name" value="#{restaurantFinderController.restaurant.name}"></h:inputText>
+		
+		<h:outputLabel for="description" value="Description:"></h:outputLabel>
+		<h:inputText id="description" value="#{restaurantFinderController.restaurant.description}"></h:inputText>
+		
+		<h:outputLabel for="imageUrl" value="ImageUrl:"></h:outputLabel>
+		<h:inputText id="imageUrl" value="#{restaurantFinderController.restaurant.imageUrl}"></h:inputText>
+		
+		<h:outputLabel for="pointsOutOfTen" value="PointsOutOfTen:"></h:outputLabel>
+		<h:inputText id="pointsOutOfTen" value="#{restaurantFinderController.restaurant.pointsOutOfTen}"></h:inputText>
+		
 		<br></br>
 		<br></br>
 		<h:commandButton value="Add" action="#{restaurantFinderController.doAddRestaurant}"></h:commandButton>

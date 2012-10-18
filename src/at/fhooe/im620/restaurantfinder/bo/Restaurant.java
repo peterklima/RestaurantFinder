@@ -22,7 +22,13 @@ public class Restaurant implements Serializable {
 	
 	private String name;
 	
+	private String description;
+	
 	private Address address;
+	
+	private String imageUrl;
+	
+	private float pointsOutOfTen;
 	
 	private Category category;
 	
@@ -38,11 +44,14 @@ public class Restaurant implements Serializable {
 		
 	}
 	
-	public Restaurant(Long id, String name, Address address, Category category){
+	public Restaurant(Long id, String name, String description, Address address, Category category, String imageUrl, float pointsOutOfTen){
 		this.id = id;
 		this.name = name;
+		this.description = description;
 		this.address = address;
 		this.category = category;
+		this.imageUrl = imageUrl;
+		this.pointsOutOfTen = pointsOutOfTen;
 	}
 
 	@Id
@@ -61,6 +70,30 @@ public class Restaurant implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public float getPointsOutOfTen() {
+		return pointsOutOfTen;
+	}
+
+	public void setPointsOutOfTen(float pointsOutOfTen) {
+		this.pointsOutOfTen = pointsOutOfTen;
 	}
 
 	@OneToOne

@@ -38,6 +38,13 @@
 
 			<h:column>
 				<f:facet name="header">
+					<h:outputText value="Image"></h:outputText>
+				</f:facet>
+				<h:graphicImage value="#{entry.imageUrl}"></h:graphicImage>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
 					<h:outputText value="Contents"></h:outputText>
 				</f:facet>
 				<h:outputText value="#{entry.name}"></h:outputText>
