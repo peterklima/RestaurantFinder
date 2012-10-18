@@ -60,6 +60,14 @@
 		<property name="restaurantDAO" ref="restaurantDAO" />
 	</bean>
 
+	<bean id="categoryDAO" class="at.fhooe.im620.restaurantfinder.dao.HibernateCategoryDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="categoryController" class="at.fhooe.im620.restaurantfinder.controller.CategoryController">
+		<property name="categoryDAO" ref="categoryDAO" />
+	</bean>
+	
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />

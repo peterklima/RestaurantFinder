@@ -12,6 +12,8 @@
 	<h:form>
 		<h:commandButton value="Add Restaurant"
 			action="#{restaurantFinderController.addRestaurant}"></h:commandButton>
+		<h:commandButton value="Add Category"
+			action="#{categoryController.addCategory}"></h:commandButton>
 
 		<h:dataTable bgcolor="White"
 			value="#{restaurantFinderController.allRestaurants}" var="entry"
