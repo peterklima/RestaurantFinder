@@ -58,6 +58,13 @@
 				</f:facet>
 				<h:outputText value="#{entry.address}"></h:outputText>
 			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Category"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{entry.category.name}"></h:outputText>
+			</h:column>
 		</h:dataTable>
 	</h:form>
 </h:body>

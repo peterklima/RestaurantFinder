@@ -3,26 +3,22 @@
  */
 package at.fhooe.im620.restaurantfinder.controller;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
+import at.fhooe.im620.restaurantfinder.bo.Category;
 import at.fhooe.im620.restaurantfinder.bo.Restaurant;
 import at.fhooe.im620.restaurantfinder.dao.GenericDAO;
 
 /**
  * @author Peter Klima
- *
+ * 
  */
 public class RestaurantFinderController {
-	
+
 	private GenericDAO<Restaurant> restaurantDAO;
-	
+	private GenericDAO<Category> categoryDAO;
+
 	/**
 	 * the model for {@link Restaurant}
 	 */
@@ -32,8 +28,8 @@ public class RestaurantFinderController {
 	 * current Restaurant
 	 */
 	private Restaurant restaurant;
-	
-	//// getter and setters
+
+	// // getter and setters
 
 	public GenericDAO<Restaurant> getRestaurantDAO() {
 		return restaurantDAO;
@@ -41,6 +37,14 @@ public class RestaurantFinderController {
 
 	public void setRestaurantDAO(GenericDAO<Restaurant> restaurantDAO) {
 		this.restaurantDAO = restaurantDAO;
+	}
+
+	public GenericDAO<Category> getCategoryDAO() {
+		return categoryDAO;
+	}
+
+	public void setCategoryDAO(GenericDAO<Category> categoryDAO) {
+		this.categoryDAO = categoryDAO;
 	}
 
 	public DataModel<Restaurant> getRestaurantModel() {
@@ -59,44 +63,58 @@ public class RestaurantFinderController {
 		this.restaurant = restaurant;
 	}
 
-	//// restaurant methods
+	public Long getCategoryId() {
+		Restaurant restaurant = getRestaurant();
+		if(restaurant == null) {
+			return null;
+		}
+		Category category = restaurant.getCategory();
+		if(category == null) {
+			return null;
+		}
+		return category.getId();
+	}
 
-	public DataModel<Restaurant> getAllRestaurants(){
+	public void setCategoryId(Long id) {
+		getRestaurant().setCategory(getCategoryDAO().getEntityById(id));
+	}
+
+	// // restaurant methods
+
+	public DataModel<Restaurant> getAllRestaurants() {
 		setRestaurantModel(new ListDataModel<Restaurant>(getRestaurantDAO().getAllEntities()));
 		return getRestaurantModel();
 	}
 
-	public String addRestaurant(){
+	public String addRestaurant() {
 		setRestaurant(new Restaurant());
 		return "addRestaurant"; // proceed to addRestaurant.xhtml
 	}
-	
-	public String doAddRestaurant(){
+
+	public String doAddRestaurant() {
 		getRestaurantDAO().saveOrUpdateEntity(getRestaurant());
 		return "index"; // go back to index.xhtml
 	}
 
-	public String editRestaurant(){
+	public String editRestaurant() {
 		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get selected element
 		return "editRestaurant";
 	}
-	
-	public String doEditRestaurant(){
+
+	public String doEditRestaurant() {
 		getRestaurantDAO().saveOrUpdateEntity(getRestaurant());
 		return "index";
 	}
 
-	public String deleteRestaurant(){
+	public String deleteRestaurant() {
 		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get selected element
 		getRestaurantDAO().deleteEntity(getRestaurant());
 		return "index";
 	}
-	
-	public String showRestaurant(){
+
+	public String showRestaurant() {
 		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get selected element
 		return "showRestaurant";
 	}
 
-	
-		
 }

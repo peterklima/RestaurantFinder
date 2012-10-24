@@ -41,7 +41,7 @@ implements GenericDAO<T>{
 	}
 
 	@Override
-	public T getEntityById(int id) {
+	public T getEntityById(Long id) {
 		return (T) 
 			getHibernateTemplate().load(getPersistentClass(), id);
 	}

@@ -24,6 +24,12 @@
 		<h:outputLabel for="pointsOutOfTen" value="PointsOutOfTen:"></h:outputLabel>
 		<h:inputText id="pointsOutOfTen" value="#{restaurantFinderController.restaurant.pointsOutOfTen}"></h:inputText>
 		
+		<h:outputLabel for="category" value="Category:"></h:outputLabel>
+		<h:selectOneListbox id="category" value="#{restaurantFinderController.categoryId}">
+			<f:selectItems value="#{categoryController.categoryDAO.allEntities}"
+				var="category" itemLabel="#{category.name}" itemValue="#{category.id}"></f:selectItems>
+		</h:selectOneListbox>
+		
 		<br></br>
 		<br></br>
 		<h:commandButton value="Add" action="#{restaurantFinderController.doAddRestaurant}"></h:commandButton>

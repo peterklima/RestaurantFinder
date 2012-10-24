@@ -58,6 +58,7 @@
 
 	<bean id="restaurantFinderController" class="at.fhooe.im620.restaurantfinder.controller.RestaurantFinderController">
 		<property name="restaurantDAO" ref="restaurantDAO" />
+		<property name="categoryDAO" ref="categoryDAO" />
 	</bean>
 
 	<bean id="categoryDAO" class="at.fhooe.im620.restaurantfinder.dao.HibernateCategoryDAOImpl">
