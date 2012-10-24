@@ -5,43 +5,51 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Show Restaurant</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Show Restaurant</title>
 </h:head>
 <h:body>
-	<h1>Restaurant: "<h:outputText value="#{restaurantFinderController.restaurant.name}"></h:outputText>"</h1>
+	<h1>
+		Restaurant: "
+		<h:outputText value="#{restaurantFinderController.restaurant.name}"></h:outputText>
+		"
+	</h1>
 	<h:form>
 		<h:commandButton value="Back" action="index"></h:commandButton>
 
-		<h:commandButton value="AddAddress" action="#{restaurantFinderController.addAddress}"></h:commandButton>
-		<h:outputText value="#{restaurantFinder.restaurant.address}"></h:outputText>
 		<br></br>
 		<br></br>
 
-		
-		<h:dataTable bgcolor="White" value="#{restaurantFinderController.restaurant.contactInfos}" var="entry" border="2">
+		<h:commandButton value="Add Contact Info"
+			action="#{restaurantFinderController.addContactInfo}"></h:commandButton>
+		<h:dataTable bgcolor="White"
+			value="#{restaurantFinderController.allContactInfos}" var="entry"
+			border="2">
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Operation"></h:outputText>
 				</f:facet>
-				<h:commandButton value="Edit" action="#{restaurantFinderController.editContactInfo}"/>
-				<h:commandButton value="Delete" action="#{restaurantFinderController.deleteContactInfo}"/>
+				<h:commandButton value="Edit"
+					action="#{restaurantFinderController.editContactInfo}" />
+				<h:commandButton value="Delete"
+					action="#{restaurantFinderController.deleteContactInfo}"
+					onclick="return confirm('Sure?');" />
 			</h:column>
-			
+
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="id"></h:outputText>
 				</f:facet>
 				<h:outputText value="#{entry.id}"></h:outputText>
 			</h:column>
-			
+
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Type"></h:outputText>
 				</f:facet>
 				<h:outputText value="#{entry.type}"></h:outputText>
 			</h:column>
-			
+
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Info"></h:outputText>

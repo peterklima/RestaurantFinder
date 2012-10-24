@@ -5,25 +5,32 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Add Restaurant</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Add Restaurant</title>
 </h:head>
 <h:body>
 	<h1>Add Restaurant</h1>
 	<h:form>
 
 		<h:outputLabel for="name" value="Name:"></h:outputLabel>
-		<h:inputText id="name" value="#{restaurantFinderController.restaurant.name}"></h:inputText>
-		
+		<h:inputText id="name"
+			value="#{restaurantFinderController.restaurant.name}"></h:inputText>
+
+		<br></br>
 		<h:outputLabel for="description" value="Description:"></h:outputLabel>
-		<h:inputText id="description" value="#{restaurantFinderController.restaurant.description}"></h:inputText>
-		
+		<h:inputText id="description"
+			value="#{restaurantFinderController.restaurant.description}"></h:inputText>
+
+		<br></br>
 		<h:outputLabel for="imageUrl" value="ImageUrl:"></h:outputLabel>
-		<h:inputText id="imageUrl" value="#{restaurantFinderController.restaurant.imageUrl}"></h:inputText>
-		
+		<h:inputText id="imageUrl"
+			value="#{restaurantFinderController.restaurant.imageUrl}"></h:inputText>
+
+		<br></br>
 		<h:outputLabel for="pointsOutOfTen" value="PointsOutOfTen:"></h:outputLabel>
-		<h:inputText id="pointsOutOfTen" value="#{restaurantFinderController.restaurant.pointsOutOfTen}"></h:inputText>
-		
+		<h:inputText id="pointsOutOfTen"
+			value="#{restaurantFinderController.restaurant.pointsOutOfTen}"></h:inputText>
+
 		<h:outputLabel for="category" value="Category:"></h:outputLabel>
 		<h:selectOneListbox id="category" value="#{restaurantFinderController.categoryId}">
 			<f:selectItems value="#{categoryController.categoryDAO.allEntities}"
@@ -32,7 +39,8 @@
 		
 		<br></br>
 		<br></br>
-		<h:commandButton value="Add" action="#{restaurantFinderController.doAddRestaurant}"></h:commandButton>
+		<h:commandButton value="Add"
+			action="#{restaurantFinderController.doAddRestaurant}"></h:commandButton>
 		<h:commandButton value="Cancel" action="index"></h:commandButton>
 
 	</h:form>

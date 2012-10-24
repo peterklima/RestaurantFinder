@@ -1,6 +1,7 @@
 package at.fhooe.im620.restaurantfinder.bo;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -32,7 +33,7 @@ public class Restaurant implements Serializable {
 	
 	private Category category;
 	
-	private Set<ContactInfo> contactInfos;
+	private List<ContactInfo> contactInfos;
 	
 	private Set<Tag> tags;
 	
@@ -41,7 +42,6 @@ public class Restaurant implements Serializable {
 	private Set<DayRange> closedDays;
 	
 	public Restaurant(){
-		
 	}
 	
 	public Restaurant(Long id, String name, String description, Address address, Category category, String imageUrl, float pointsOutOfTen){
@@ -53,7 +53,7 @@ public class Restaurant implements Serializable {
 		this.imageUrl = imageUrl;
 		this.pointsOutOfTen = pointsOutOfTen;
 	}
-
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getId() {
@@ -115,11 +115,11 @@ public class Restaurant implements Serializable {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	public Set<ContactInfo> getContactInfos() {
+	public List<ContactInfo> getContactInfos() {
 		return contactInfos;
 	}
 
-	public void setContactInfos(Set<ContactInfo> contactInfos) {
+	public void setContactInfos(List<ContactInfo> contactInfos) {
 		this.contactInfos = contactInfos;
 	}
 
