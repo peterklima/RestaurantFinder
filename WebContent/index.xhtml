@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
@@ -11,25 +9,17 @@
 </h:head>
 <h:body>
 	<h:form>
-		<h:commandButton value="Add Restaurant"
-			action="#{restaurantFinderController.addRestaurant}"></h:commandButton>
-		<h:commandButton value="Add Category"
-			action="#{categoryController.addCategory}"></h:commandButton>
+		<h:commandButton value="Add Restaurant" action="#{restaurantFinderController.addRestaurant}"></h:commandButton>
+		<h:commandButton value="Add Category" action="#{categoryController.addCategory}"></h:commandButton>
 
-		<h:dataTable bgcolor="White"
-			value="#{restaurantFinderController.allRestaurants}" var="entry"
-			border="2">
+		<h:dataTable bgcolor="White" value="#{restaurantFinderController.allRestaurants}" var="entry" border="2">
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Operation"></h:outputText>
 				</f:facet>
-				<h:commandButton value="Edit"
-					action="#{restaurantFinderController.editRestaurant}" />
-				<h:commandButton value="Delete"
-					action="#{restaurantFinderController.deleteRestaurant}"
-					onclick="return confirm('Sure?');" />
-				<h:commandButton value="Detail"
-					action="#{restaurantFinderController.showRestaurant}" />
+				<h:commandButton value="Edit" action="#{restaurantFinderController.editRestaurant}" />
+				<h:commandButton value="Delete" action="#{restaurantFinderController.deleteRestaurant}" onclick="return confirm('Sure?');" />
+				<h:commandButton value="Detail" action="#{restaurantFinderController.showRestaurant}" />
 			</h:column>
 
 			<h:column>
@@ -68,18 +58,23 @@
 				</f:facet>
 
 				<ui:fragment rendered="${entry.address == null}">
-					<h:commandButton value="Add Address"
-						action="#{restaurantFinderController.addAddress}"></h:commandButton>
+					<h:commandButton value="Add Address" action="#{restaurantFinderController.addAddress}"></h:commandButton>
 				</ui:fragment>
 
 				<ui:fragment rendered="${entry.address != null}">
-					<h:commandButton value="Edit Address"
-						action="#{restaurantFinderController.editAddress}"></h:commandButton>
-					<h:outputText value="#{entry.address}"></h:outputText>
+					<h:outputText value="#{entry.address.street}"></h:outputText>&nbsp;
+					<h:outputText value="#{entry.address.streetNumber}"></h:outputText>
+					<br />
+					<h:outputText value="#{entry.address.postalcode}"></h:outputText>&nbsp;
+					<h:outputText value="#{entry.address.city}"></h:outputText>
+					<br />
+					<h:outputText value="#{entry.address.country}"></h:outputText>
+					<br />
+					<h:commandButton value="Edit Address" action="#{restaurantFinderController.editAddress}"></h:commandButton>
 				</ui:fragment>
 
 			</h:column>
-			
+
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Category"></h:outputText>
@@ -88,6 +83,5 @@
 			</h:column>
 		</h:dataTable>
 	</h:form>
-
 </h:body>
 </html>
