@@ -2,20 +2,45 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Show Restaurant</title>
 </h:head>
 <h:body>
-	<h1>
-		Restaurant: "
-		<h:outputText value="#{restaurantFinderController.restaurant.name}"></h:outputText>
-		"
-	</h1>
 	<h:form>
 		<h:commandButton value="Back" action="index"></h:commandButton>
+		<h:commandButton value="Edit" action="editRestaurant"></h:commandButton>
+		<ui:fragment rendered="${restaurantFinderController.restaurant.address == null}">
+			<h:commandButton value="Add Address"
+				action="#{restaurantFinderController.addAddress}"></h:commandButton>
+		</ui:fragment>
+		<ui:fragment rendered="${restaurantFinderController.restaurant.address != null}">
+			<h:commandButton value="Edit Address"
+				action="#{restaurantFinderController.editAddress}"></h:commandButton>
+		</ui:fragment>
+
+		<h1>
+			Restaurant: "
+			<h:outputText value="#{restaurantFinderController.restaurant.name}"></h:outputText>
+			"
+		</h1>
+		<h:outputText
+			value="#{restaurantFinderController.restaurant.pointsOutOfTen}"></h:outputText> of 10 Points <br />
+		<c:forEach begin="1"
+			end="#{restaurantFinderController.restaurant.priceRangeOutOfThree}">
+		    $
+		</c:forEach> of $$$
+		
+		<br></br>
+		<br></br>
+
+		<ui:fragment rendered="${restaurantFinderController.restaurant.address != null}">
+			<h:outputText value="#{restaurantFinderController.restaurant.address}"></h:outputText>
+		</ui:fragment>
 
 		<br></br>
 		<br></br>
@@ -55,6 +80,21 @@
 					<h:outputText value="Info"></h:outputText>
 				</f:facet>
 				<h:outputText value="#{entry.info}"></h:outputText>
+			</h:column>
+		</h:dataTable>
+
+		<br></br>
+		<br></br>
+
+		<h:commandButton value="Assign Tags"
+			action="#{restaurantFinderController.assignTags}"></h:commandButton>
+		<h:dataTable bgcolor="White"
+			value="#{restaurantFinderController.allTags}" var="entry" border="2">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Name"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{entry.name}"></h:outputText>
 			</h:column>
 		</h:dataTable>
 

@@ -38,6 +38,11 @@
 		</h:selectOneMenu>
 		
 		<br></br>
+		<h:outputLabel for="priceRangeOutOfThree" value="PriceRangeOutOfThree:"></h:outputLabel>
+		<h:inputText id="priceRangeOutOfThree"
+			value="#{restaurantFinderController.restaurant.priceRangeOutOfThree}"></h:inputText>
+
+		<br></br>
 		<br></br>
 		<h:commandButton value="Add"
 			action="#{restaurantFinderController.doAddRestaurant}"></h:commandButton>

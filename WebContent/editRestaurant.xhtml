@@ -32,6 +32,11 @@
 			value="#{restaurantFinderController.restaurant.pointsOutOfTen}"></h:inputText>
 
 		<br></br>
+		<h:outputLabel for="priceRangeOutOfThree" value="PriceRangeOutOfThree:"></h:outputLabel>
+		<h:inputText id="priceRangeOutOfThree"
+			value="#{restaurantFinderController.restaurant.priceRangeOutOfThree}"></h:inputText>
+
+		<br></br>
 		<br></br>
 		<h:commandButton value="Save Entry"
 			action="#{restaurantFinderController.doEditRestaurant}"></h:commandButton>

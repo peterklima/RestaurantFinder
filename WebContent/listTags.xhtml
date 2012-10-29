@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>RestaurantFinder v1</title>
+</h:head>
+<h:body>
+	<h:form>
+		<h:commandButton value="Home" action="index"></h:commandButton>
+	
+		<h:commandButton value="Add Tags"
+			action="#{tagController.addTag}"></h:commandButton>
+
+		<h:dataTable bgcolor="White"
+			value="#{tagController.allTags}" var="entry"
+			border="2">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Operation"></h:outputText>
+				</f:facet>
+				<h:commandButton value="Edit"
+					action="#{tagController.editTag}" />
+				<h:commandButton value="Delete"
+					action="#{tagController.deleteTag}"
+					onclick="return confirm('Sure?');" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="id"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{entry.id}"></h:outputText>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Name"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{entry.name}"></h:outputText>
+			</h:column>
+
+		</h:dataTable>
+	</h:form>
+
+</h:body>
+</html>

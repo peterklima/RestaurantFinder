@@ -54,8 +54,7 @@ public class ClosedDayController {
 	// // closed day methods
 
 	public DataModel<DayRange> getAllClosedDays() {
-		Set<DayRange> allEntities = getRestaurantFinderController().getRestaurant().getClosedDays();
-		setClosedDayModel(new ListDataModel<DayRange>(new ArrayList<DayRange>(allEntities)));
+		setClosedDayModel(new ListDataModel<DayRange>(getRestaurantFinderController().getRestaurant().getClosedDays()));
 		return getClosedDayModel();
 	}
 

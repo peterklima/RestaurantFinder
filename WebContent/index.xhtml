@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -9,17 +12,27 @@
 </h:head>
 <h:body>
 	<h:form>
-		<h:commandButton value="Add Restaurant" action="#{restaurantFinderController.addRestaurant}"></h:commandButton>
-		<h:commandButton value="Add Category" action="#{categoryController.addCategory}"></h:commandButton>
+		<h:commandButton value="Home"
+			action="index"></h:commandButton>
+		<h:commandButton value="Add Restaurant"
+			action="#{restaurantFinderController.addRestaurant}"></h:commandButton>
+		<h:commandButton value="Add Category"
+			action="#{categoryController.addCategory}"></h:commandButton>
+		<h:commandButton value="Manage Tags"
+			action="#{tagController.listTags}"></h:commandButton>
 
 		<h:dataTable bgcolor="White" value="#{restaurantFinderController.allRestaurants}" var="entry" border="2">
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Operation"></h:outputText>
 				</f:facet>
-				<h:commandButton value="Edit" action="#{restaurantFinderController.editRestaurant}" />
-				<h:commandButton value="Delete" action="#{restaurantFinderController.deleteRestaurant}" onclick="return confirm('Sure?');" />
-				<h:commandButton value="Detail" action="#{restaurantFinderController.showRestaurant}" />
+				<h:commandButton value="Edit"
+					action="#{restaurantFinderController.editRestaurant}" />
+				<h:commandButton value="Detail"
+					action="#{restaurantFinderController.showRestaurant}" />
+				<h:commandButton value="Delete"
+					action="#{restaurantFinderController.deleteRestaurant}"
+					onclick="return confirm('Sure?');" />
 			</h:column>
 
 			<h:column>
@@ -50,6 +63,15 @@
 					<h:outputText value="PointsOutOfTen"></h:outputText>
 				</f:facet>
 				<h:outputText value="#{entry.pointsOutOfTen}"></h:outputText>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="PriceRangeOutOfThree"></h:outputText>
+				</f:facet>
+				<c:forEach begin="1" end="#{entry.priceRangeOutOfThree}">
+					$
+				</c:forEach>
 			</h:column>
 
 			<h:column>

@@ -3,6 +3,9 @@
  */
 package at.fhooe.im620.restaurantfinder.controller;
 
+import java.util.HashMap;
+import java.util.List;
+
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
@@ -12,6 +15,7 @@ import at.fhooe.im620.restaurantfinder.bo.Category;
 import at.fhooe.im620.restaurantfinder.bo.ContactInfo;
 import at.fhooe.im620.restaurantfinder.bo.DayRange;
 import at.fhooe.im620.restaurantfinder.bo.Restaurant;
+import at.fhooe.im620.restaurantfinder.bo.Tag;
 import at.fhooe.im620.restaurantfinder.dao.GenericDAO;
 
 /**
@@ -24,6 +28,7 @@ public class RestaurantFinderController {
 	private GenericDAO<Category> categoryDAO;
 	private GenericDAO<BusinessHours> businessHourDAO;
 	private GenericDAO<Address> addressDAO;
+	private GenericDAO<Tag> tagDAO;
 
 	/**
 	 * the model for {@link Restaurant}
@@ -84,6 +89,14 @@ public class RestaurantFinderController {
 
 	public void setAddressDAO(GenericDAO<Address> addressDAO) {
 		this.addressDAO = addressDAO;
+	}
+
+	public GenericDAO<Tag> getTagDAO() {
+		return tagDAO;
+	}
+
+	public void setTagDAO(GenericDAO<Tag> tagDAO) {
+		this.tagDAO = tagDAO;
 	}
 
 	public DataModel<Restaurant> getRestaurantModel() {
@@ -160,7 +173,9 @@ public class RestaurantFinderController {
 	}
 
 	public String editRestaurant() {
-		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get selected element
+		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get
+																		// selected
+																		// element
 		return "editRestaurant";
 	}
 
@@ -170,20 +185,26 @@ public class RestaurantFinderController {
 	}
 
 	public String deleteRestaurant() {
-		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get selected element
+		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get
+																		// selected
+																		// element
 		getRestaurantDAO().deleteEntity(getRestaurant());
 		return "index";
 	}
 
 	public String showRestaurant() {
-		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get selected element
+		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get
+																		// selected
+																		// element
 		return "showRestaurant";
 	}
 
 	// // address methods
 
 	public String addAddress() {
-		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get selected element
+		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get
+																		// selected
+																		// element
 		setAddress(new Address());
 		return "addAddress"; // proceed to addAddress.xhtml
 	}
@@ -196,7 +217,9 @@ public class RestaurantFinderController {
 	}
 
 	public String editAddress() {
-		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get selected element
+		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get
+																		// selected
+																		// element
 		setAddress(getRestaurant().getAddress());
 		return "editAddress";
 	}
@@ -212,18 +235,20 @@ public class RestaurantFinderController {
 		setContactInfoModel(new ListDataModel<ContactInfo>(getRestaurant().getContactInfos()));
 		return getContactInfoModel();
 	}
-	
+
 	// // businessHours methods
 
 	public String addBusinessHour() {
-		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get selected element
+		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get
+																		// selected
+																		// element
 		return "addBusinessHours"; // proceed to addBusinessHours.xhtml
 	}
 
 	public void addBusinessHourToRestaurant(BusinessHours businessHour) {
 		Restaurant currentRestaurant = getRestaurant();
 		currentRestaurant.getHours().add(businessHour);
-		getRestaurantDAO().saveOrUpdateEntity(currentRestaurant);		
+		getRestaurantDAO().saveOrUpdateEntity(currentRestaurant);
 	}
 
 	public void removeBusinessHourFromRestaurant(BusinessHours businessHour) {
@@ -231,18 +256,20 @@ public class RestaurantFinderController {
 		currentRestaurant.getHours().remove(businessHour);
 		getRestaurantDAO().saveOrUpdateEntity(currentRestaurant);
 	}
-	
+
 	// // closedDay methods
 
 	public String addClosedDays() {
-		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get selected element
+		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get
+																		// selected
+																		// element
 		return "addClosedDays"; // proceed to addClosedDays.xhtml
 	}
 
 	public void addClosedDaysToRestaurant(DayRange closedDays) {
 		Restaurant currentRestaurant = getRestaurant();
 		currentRestaurant.getClosedDays().add(closedDays);
-		getRestaurantDAO().saveOrUpdateEntity(currentRestaurant);	
+		getRestaurantDAO().saveOrUpdateEntity(currentRestaurant);
 	}
 
 	public void removeClosedDaysFromRestaurant(DayRange closedDays) {
@@ -250,4 +277,42 @@ public class RestaurantFinderController {
 		currentRestaurant.getClosedDays().remove(closedDays);
 		getRestaurantDAO().saveOrUpdateEntity(currentRestaurant);
 	}
+
+	// // tag methods
+
+	private HashMap<Long, Boolean> checkedTags = new HashMap<Long, Boolean>();
+
+	public HashMap<Long, Boolean> getCheckedTags() {
+		return checkedTags;
+	}
+
+	public void setCheckedTags(HashMap<Long, Boolean> checkedTags) {
+		this.checkedTags = checkedTags;
+	}
+
+	public DataModel<Tag> getAllTags() {
+		return new ListDataModel<Tag>(getRestaurant().getTags());
+	}
+
+	public String assignTags() {
+		checkedTags.clear();
+		for (Tag tag : restaurant.getTags()) {
+			checkedTags.put(tag.getId(), true);
+		}
+		return "assignTags";
+	}
+
+	public String doAssignTags() {
+		restaurant.getTags().clear();
+
+		List<Tag> tags = tagDAO.getAllEntities();
+		for (Tag tag : tags) {
+			if (checkedTags.get(tag.getId())) {
+				restaurant.getTags().add(tag);
+				restaurantDAO.saveOrUpdateEntity(restaurant);
+			}
+		}
+		return "showRestaurant";
+	}
+
 }

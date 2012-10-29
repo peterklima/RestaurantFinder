@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 public class Restaurant implements Serializable {
 	
@@ -31,15 +34,17 @@ public class Restaurant implements Serializable {
 	
 	private float pointsOutOfTen;
 	
+	private int priceRangeOutOfThree;
+	
 	private Category category;
 	
 	private List<ContactInfo> contactInfos;
 	
-	private Set<Tag> tags;
+	private List<Tag> tags;
 	
-	private Set<BusinessHours> hours;
+	private List<BusinessHours> hours;
 	
-	private Set<DayRange> closedDays;
+	private List<DayRange> closedDays;
 	
 	public Restaurant(){
 	}
@@ -96,6 +101,14 @@ public class Restaurant implements Serializable {
 		this.pointsOutOfTen = pointsOutOfTen;
 	}
 
+	public int getPriceRangeOutOfThree() {
+		return priceRangeOutOfThree;
+	}
+
+	public void setPriceRangeOutOfThree(int priceRangeOutOfThree) {
+		this.priceRangeOutOfThree = priceRangeOutOfThree;
+	}
+
 	@OneToOne
 	public Address getAddress() {
 		return address;
@@ -114,7 +127,8 @@ public class Restaurant implements Serializable {
 		this.category = category;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade = CascadeType.ALL)
 	public List<ContactInfo> getContactInfos() {
 		return contactInfos;
 	}
@@ -123,30 +137,33 @@ public class Restaurant implements Serializable {
 		this.contactInfos = contactInfos;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	public Set<Tag> getTags() {
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade = CascadeType.ALL)
+	public List<Tag> getTags() {
 		return tags;
 	}
 
-	public void setTags(Set<Tag> tags) {
+	public void setTags(List<Tag> tags) {
 		this.tags = tags;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	public Set<BusinessHours> getHours() {
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade = CascadeType.ALL)
+	public List<BusinessHours> getHours() {
 		return hours;
 	}
 
-	public void setHours(Set<BusinessHours> hours) {
+	public void setHours(List<BusinessHours> hours) {
 		this.hours = hours;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	public Set<DayRange> getClosedDays() {
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade = CascadeType.ALL)
+	public List<DayRange> getClosedDays() {
 		return closedDays;
 	}
 
-	public void setClosedDays(Set<DayRange> closedDays) {
+	public void setClosedDays(List<DayRange> closedDays) {
 		this.closedDays = closedDays;
 	}
 

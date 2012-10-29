@@ -64,6 +64,7 @@
 		<property name="restaurantDAO" ref="restaurantDAO" />
 		<property name="categoryDAO" ref="categoryDAO" />
 		<property name="addressDAO" ref="addressDAO" />
+		<property name="tagDAO" ref="tagDAO" />
 	</bean>
 
 	<bean id="categoryDAO" class="at.fhooe.im620.restaurantfinder.dao.HibernateCategoryDAOImpl">
@@ -97,6 +98,14 @@
 		<property name="closedDayDAO" ref="closedDayDAO" />
 	</bean>
 		
+	<bean id="tagDAO" class="at.fhooe.im620.restaurantfinder.dao.HibernateTagDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="tagController" class="at.fhooe.im620.restaurantfinder.controller.TagController">
+		<property name="tagDAO" ref="tagDAO" />
+	</bean>
+	
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
