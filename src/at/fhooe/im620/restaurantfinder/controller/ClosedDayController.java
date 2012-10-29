@@ -1,5 +1,8 @@
 package at.fhooe.im620.restaurantfinder.controller;
 
+import java.util.ArrayList;
+import java.util.Set;
+
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
@@ -51,7 +54,8 @@ public class ClosedDayController {
 	// // closed day methods
 
 	public DataModel<DayRange> getAllClosedDays() {
-		setClosedDayModel(new ListDataModel<DayRange>(getClosedDayDAO().getAllEntities()));
+		Set<DayRange> allEntities = getRestaurantFinderController().getRestaurant().getClosedDays();
+		setClosedDayModel(new ListDataModel<DayRange>(new ArrayList<DayRange>(allEntities)));
 		return getClosedDayModel();
 	}
 

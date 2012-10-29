@@ -32,14 +32,18 @@
 			<f:facet name="header">
 				<h:outputText value="Start Day"></h:outputText>
 			</f:facet>
-			<h:outputText value="#{entry.startDay}"></h:outputText>
+			<h:outputText value="#{entry.startDay}">
+				<f:convertDateTime pattern="MMM dd, yyyy" timeZone="GMT+2:00"></f:convertDateTime>
+			</h:outputText>
 		</h:column>
 
 		<h:column>
 			<f:facet name="header">
 				<h:outputText value="End Day"></h:outputText>
 			</f:facet>
-			<h:outputText value="#{entry.endDay}"></h:outputText>
+			<h:outputText value="#{entry.endDay}">
+				<f:convertDateTime pattern="MMM dd, yyyy" timeZone="GMT+2:00"></f:convertDateTime>
+			</h:outputText>
 		</h:column>
 	</h:dataTable>
 

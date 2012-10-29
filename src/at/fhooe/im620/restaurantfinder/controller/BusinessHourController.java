@@ -1,5 +1,8 @@
 package at.fhooe.im620.restaurantfinder.controller;
 
+import java.util.ArrayList;
+import java.util.Set;
+
 import javax.faces.convert.ConverterException;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
@@ -102,7 +105,8 @@ public class BusinessHourController {
 	// // restaurant methods
 
 	public DataModel<BusinessHours> getAllBusinessHours() {
-		setBusinessHourModel(new ListDataModel<BusinessHours>(getBusinessHourDAO().getAllEntities()));
+		Set<BusinessHours> allEntities = getRestaurantFinderController().getRestaurant().getHours();
+		setBusinessHourModel(new ListDataModel<BusinessHours>(new ArrayList<BusinessHours>(allEntities)));
 		return getBusinessHourModel();
 	}
 
