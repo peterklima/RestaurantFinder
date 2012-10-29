@@ -72,7 +72,17 @@
 					<br />
 					<h:commandButton value="Edit Address" action="#{restaurantFinderController.editAddress}"></h:commandButton>
 				</ui:fragment>
+			</h:column>
 
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Business Hours"></h:outputText>
+				</f:facet>
+
+				<h:outputText value="#{entry.hours}" escape="false">
+					<f:converter converterId="at.fhooe.im620.restaurantfinder.converter.BusinessHourConverter"></f:converter>
+				</h:outputText>
+				<h:commandButton value="Edit BusinessHours" action="#{restaurantFinderController.addBusinessHour}"></h:commandButton>
 			</h:column>
 
 			<h:column>
@@ -83,5 +93,6 @@
 			</h:column>
 		</h:dataTable>
 	</h:form>
+	<h:messages></h:messages>
 </h:body>
 </html>

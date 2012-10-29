@@ -73,10 +73,23 @@
 	<bean id="categoryController" class="at.fhooe.im620.restaurantfinder.controller.CategoryController">
 		<property name="categoryDAO" ref="categoryDAO" />
 	</bean>
+
+	<bean id="businessHourDAO" class="at.fhooe.im620.restaurantfinder.dao.HibernateBusinessHourDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	
+	<bean id="timeDAO" class="at.fhooe.im620.restaurantfinder.dao.HibernateTimeDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="businessHourController" class="at.fhooe.im620.restaurantfinder.controller.BusinessHourController">
+		<property name="restaurantFinderController" ref="restaurantFinderController" />
+		<property name="businessHourDAO" ref="businessHourDAO" />
+		<property name="timeDAO" ref="timeDAO" />
+	</bean>
+		
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
 </beans>

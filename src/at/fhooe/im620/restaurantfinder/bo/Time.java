@@ -9,20 +9,25 @@ import javax.persistence.Id;
 
 @Entity
 public class Time implements Serializable {
-	
+
 	private static final long serialVersionUID = 5412377939339739744L;
 
 	private Long id;
-	
+
 	private int hour;
-	
+
 	private int minute;
-	
+
 	public Time() {
 	}
 
+	public Time(int hour, int minute) {
+		this.hour = hour;
+		this.minute = minute;
+	}
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -71,7 +76,9 @@ public class Time implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return hour + ":" + (minute < 10 ? "0" : "") + minute;
+	}
 }

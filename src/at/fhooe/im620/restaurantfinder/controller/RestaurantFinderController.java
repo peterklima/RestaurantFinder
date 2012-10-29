@@ -6,8 +6,9 @@ package at.fhooe.im620.restaurantfinder.controller;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
-import at.fhooe.im620.restaurantfinder.bo.Category;
 import at.fhooe.im620.restaurantfinder.bo.Address;
+import at.fhooe.im620.restaurantfinder.bo.BusinessHours;
+import at.fhooe.im620.restaurantfinder.bo.Category;
 import at.fhooe.im620.restaurantfinder.bo.ContactInfo;
 import at.fhooe.im620.restaurantfinder.bo.Restaurant;
 import at.fhooe.im620.restaurantfinder.dao.GenericDAO;
@@ -20,9 +21,9 @@ public class RestaurantFinderController {
 
 	private GenericDAO<Restaurant> restaurantDAO;
 	private GenericDAO<Category> categoryDAO;
-
+	private GenericDAO<BusinessHours> businessHourDAO;
 	private GenericDAO<Address> addressDAO;
-	
+
 	/**
 	 * the model for {@link Restaurant}
 	 */
@@ -33,23 +34,22 @@ public class RestaurantFinderController {
 	 */
 	private Restaurant restaurant;
 
-	
 	/**
 	 * current Address
 	 */
 	private Address address;
-	
+
 	/**
 	 * the model for {@link ContactInfo}
 	 */
 	private DataModel<ContactInfo> contactInfoModel;
-	
+
 	/**
 	 * current Contact info
 	 */
 	private ContactInfo contactInfo;
-	
-	//// getter and setters
+
+	// // getter and setters
 
 	// // getter and setters
 
@@ -67,6 +67,14 @@ public class RestaurantFinderController {
 
 	public void setCategoryDAO(GenericDAO<Category> categoryDAO) {
 		this.categoryDAO = categoryDAO;
+	}
+
+	public GenericDAO<BusinessHours> getBusinessHourDAO() {
+		return businessHourDAO;
+	}
+
+	public void setBusinessHourDAO(GenericDAO<BusinessHours> businessHourDAO) {
+		this.businessHourDAO = businessHourDAO;
 	}
 
 	public GenericDAO<Address> getAddressDAO() {
@@ -112,18 +120,18 @@ public class RestaurantFinderController {
 	public ContactInfo getContactInfo() {
 		return contactInfo;
 	}
-	
+
 	public void setContactInfo(ContactInfo contactInfo) {
 		this.contactInfo = contactInfo;
 	}
 
 	public Long getCategoryId() {
 		Restaurant restaurant = getRestaurant();
-		if(restaurant == null) {
+		if (restaurant == null) {
 			return null;
 		}
 		Category category = restaurant.getCategory();
-		if(category == null) {
+		if (category == null) {
 			return null;
 		}
 		return category.getId();
@@ -170,37 +178,50 @@ public class RestaurantFinderController {
 		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get selected element
 		return "showRestaurant";
 	}
-	
-	//// address methods
-	
-	public String addAddress(){
+
+	// // address methods
+
+	public String addAddress() {
 		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get selected element
 		setAddress(new Address());
 		return "addAddress"; // proceed to addAddress.xhtml
 	}
-	
-	public String doAddAddress(){
+
+	public String doAddAddress() {
 		getAddressDAO().saveOrUpdateEntity(getAddress());
 		getRestaurant().setAddress(getAddress());
 		getRestaurantDAO().saveOrUpdateEntity(getRestaurant());
 		return "index"; // go back to index.xhtml
 	}
 
-	public String editAddress(){
+	public String editAddress() {
 		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get selected element
 		setAddress(getRestaurant().getAddress());
 		return "editAddress";
 	}
-	
-	public String doEditAddress(){
+
+	public String doEditAddress() {
 		getAddressDAO().saveOrUpdateEntity(getAddress());
 		return "index";
 	}
 
-	//// contact info methods
+	// // contact info methods
 
-	public DataModel<ContactInfo> getAllContactInfos(){
+	public DataModel<ContactInfo> getAllContactInfos() {
 		setContactInfoModel(new ListDataModel<ContactInfo>(getRestaurant().getContactInfos()));
 		return getContactInfoModel();
+	}
+	
+	// // businessHours methods
+
+	public String addBusinessHour() {
+		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get selected element
+		return "addBusinessHours"; // proceed to addBusinessHours.xhtml
+	}
+
+	public void addBusinessHourToRestaurant(BusinessHours businessHour) {
+		Restaurant currentRestaurant = getRestaurant();
+		currentRestaurant.getHours().add(businessHour);
+		getRestaurantDAO().saveOrUpdateEntity(currentRestaurant);		
 	}
 }
