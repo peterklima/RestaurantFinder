@@ -9,8 +9,9 @@
 	<title>Assign Tags</title>
 </h:head>
 <h:body>
-	<h1>Assign Tags</h1>
 	<h:form>
+		<h:commandButton value="Manage Tags" action="listTags"></h:commandButton>
+		<h1>Assign Tags</h1>
 
 		<h:dataTable bgcolor="White" value="#{tagController.allTags}"
 			var="entry" border="2">

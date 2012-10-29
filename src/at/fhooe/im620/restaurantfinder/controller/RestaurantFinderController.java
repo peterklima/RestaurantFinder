@@ -162,47 +162,34 @@ public class RestaurantFinderController {
 
 	public String addRestaurant() {
 		setRestaurant(new Restaurant());
-		return "addRestaurant"; // proceed to addRestaurant.xhtml
+		return "updateRestaurant"; // proceed to addRestaurant.xhtml
 	}
 
-	public String doAddRestaurant() {
+	public String doUpdateRestaurant() {
 		getRestaurantDAO().saveOrUpdateEntity(getRestaurant());
 		return "index"; // go back to index.xhtml
 	}
 
 	public String editRestaurant() {
-		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get
-																		// selected
-																		// element
-		return "editRestaurant";
-	}
-
-	public String doEditRestaurant() {
-		getRestaurantDAO().saveOrUpdateEntity(getRestaurant());
-		return "index";
+		setRestaurant((Restaurant) getRestaurantModel().getRowData());
+		return "updateRestaurant";
 	}
 
 	public String deleteRestaurant() {
-		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get
-																		// selected
-																		// element
+		setRestaurant((Restaurant) getRestaurantModel().getRowData());
 		getRestaurantDAO().deleteEntity(getRestaurant());
 		return "index";
 	}
 
 	public String showRestaurant() {
-		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get
-																		// selected
-																		// element
+		setRestaurant((Restaurant) getRestaurantModel().getRowData());
 		return "showRestaurant";
 	}
 
 	// // address methods
 
 	public String addAddress() {
-		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get
-																		// selected
-																		// element
+		setRestaurant((Restaurant) getRestaurantModel().getRowData());
 		setAddress(new Address());
 		return "addAddress"; // proceed to addAddress.xhtml
 	}
@@ -215,9 +202,7 @@ public class RestaurantFinderController {
 	}
 
 	public String editAddress() {
-		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get
-																		// selected
-																		// element
+		setRestaurant((Restaurant) getRestaurantModel().getRowData());
 		setAddress(getRestaurant().getAddress());
 		return "editAddress";
 	}
@@ -234,29 +219,24 @@ public class RestaurantFinderController {
 		return getContactInfoModel();
 	}
 
-	public String addContactInfo(){
+	public String addContactInfo() {
 		setContactInfo(new ContactInfo());
-		return "addContactInfo"; // proceed to addContactInfo.xhtml
+		getRestaurant().getContactInfos().add(getContactInfo());
+		return "updateContactInfo"; // proceed to addContactInfo.xhtml
 	}
 
-	public String doAddContactInfo(){
-		getRestaurant().getContactInfos().add(getContactInfo());
+	public String doUpdateContactInfo() {
 		getRestaurantDAO().saveOrUpdateEntity(getRestaurant());
 		return "showRestaurant"; // go back to index.xhtml
 	}
 
-	public String editContactInfo(){
-		setContactInfo(getContactInfoModel().getRowData()); // get selected element
-		return "editContactInfo";
+	public String editContactInfo() {
+		setContactInfo(getContactInfoModel().getRowData());
+		return "updateContactInfo";
 	}
 
-	public String doEditContactInfo(){
-		getRestaurantDAO().saveOrUpdateEntity(getRestaurant());
-		return "showRestaurant";
-	}
-
-	public String deleteContactInfo(){
-		setContactInfo(getContactInfoModel().getRowData()); // get selected element
+	public String deleteContactInfo() {
+		setContactInfo(getContactInfoModel().getRowData());
 		getRestaurant().getContactInfos().remove(getContactInfo());
 		getRestaurantDAO().saveOrUpdateEntity(getRestaurant());
 		return "showRestaurant";
@@ -265,9 +245,7 @@ public class RestaurantFinderController {
 	// // businessHours methods
 
 	public String addBusinessHour() {
-		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get
-																		// selected
-																		// element
+		setRestaurant((Restaurant) getRestaurantModel().getRowData());
 		return "addBusinessHours"; // proceed to addBusinessHours.xhtml
 	}
 
@@ -286,9 +264,7 @@ public class RestaurantFinderController {
 	// // closedDay methods
 
 	public String addClosedDays() {
-		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get
-																		// selected
-																		// element
+		setRestaurant((Restaurant) getRestaurantModel().getRowData());
 		return "addClosedDays"; // proceed to addClosedDays.xhtml
 	}
 

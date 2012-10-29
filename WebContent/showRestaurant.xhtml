@@ -28,17 +28,24 @@
 		</c:forEach> of $$$
 		
 		<br></br>
+
+		
 		<br></br>
 
 		<ui:fragment
 			rendered="${restaurantFinderController.restaurant.address != null}">
-			<h:outputText value="#{restaurantFinderController.restaurant.address.street}"></h:outputText>&nbsp;
-					<h:outputText value="#{restaurantFinderController.restaurant.address.streetNumber}"></h:outputText>
+			<h:outputText
+				value="#{restaurantFinderController.restaurant.address.street}"></h:outputText>&nbsp;
+					<h:outputText
+				value="#{restaurantFinderController.restaurant.address.streetNumber}"></h:outputText>
 			<br />
-			<h:outputText value="#{restaurantFinderController.restaurant.address.postalcode}"></h:outputText>&nbsp;
-					<h:outputText value="#{restaurantFinderController.restaurant.address.city}"></h:outputText>
+			<h:outputText
+				value="#{restaurantFinderController.restaurant.address.postalcode}"></h:outputText>&nbsp;
+					<h:outputText
+				value="#{restaurantFinderController.restaurant.address.city}"></h:outputText>
 			<br />
-			<h:outputText value="#{restaurantFinderController.restaurant.address.country}"></h:outputText>
+			<h:outputText
+				value="#{restaurantFinderController.restaurant.address.country}"></h:outputText>
 			<br />
 		</ui:fragment>
 
