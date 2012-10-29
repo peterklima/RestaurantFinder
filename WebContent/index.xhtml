@@ -87,6 +87,17 @@
 
 			<h:column>
 				<f:facet name="header">
+					<h:outputText value="Days Closed"></h:outputText>
+				</f:facet>
+
+				<h:outputText value="#{entry.closedDays}" escape="false">
+					<f:converter converterId="at.fhooe.im620.restaurantfinder.converter.ClosedDayConverter"></f:converter>
+				</h:outputText>
+				<h:commandButton value="Edit ClosedDays" action="#{restaurantFinderController.addClosedDays}"></h:commandButton>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
 					<h:outputText value="Category"></h:outputText>
 				</f:facet>
 				<h:outputText value="#{entry.category.name}"></h:outputText>

@@ -10,6 +10,7 @@ import at.fhooe.im620.restaurantfinder.bo.Address;
 import at.fhooe.im620.restaurantfinder.bo.BusinessHours;
 import at.fhooe.im620.restaurantfinder.bo.Category;
 import at.fhooe.im620.restaurantfinder.bo.ContactInfo;
+import at.fhooe.im620.restaurantfinder.bo.DayRange;
 import at.fhooe.im620.restaurantfinder.bo.Restaurant;
 import at.fhooe.im620.restaurantfinder.dao.GenericDAO;
 
@@ -223,5 +224,18 @@ public class RestaurantFinderController {
 		Restaurant currentRestaurant = getRestaurant();
 		currentRestaurant.getHours().add(businessHour);
 		getRestaurantDAO().saveOrUpdateEntity(currentRestaurant);		
+	}
+	
+	// // closedDay methods
+
+	public String addClosedDays() {
+		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get selected element
+		return "editClosedDays"; // proceed to editClosedDays.xhtml
+	}
+
+	public void addClosedDaysToRestaurant(DayRange closedDays) {
+		Restaurant currentRestaurant = getRestaurant();
+		currentRestaurant.getClosedDays().add(closedDays);
+		getRestaurantDAO().saveOrUpdateEntity(currentRestaurant);	
 	}
 }

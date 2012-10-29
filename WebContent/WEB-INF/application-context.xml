@@ -87,6 +87,15 @@
 		<property name="businessHourDAO" ref="businessHourDAO" />
 		<property name="timeDAO" ref="timeDAO" />
 	</bean>
+	
+	<bean id="closedDayDAO" class="at.fhooe.im620.restaurantfinder.dao.HibernateClosedDayDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="closedDayController" class="at.fhooe.im620.restaurantfinder.controller.ClosedDayController">
+		<property name="restaurantFinderController" ref="restaurantFinderController" />
+		<property name="closedDayDAO" ref="closedDayDAO" />
+	</bean>
 		
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
