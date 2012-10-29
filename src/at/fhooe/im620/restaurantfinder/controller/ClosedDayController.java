@@ -62,15 +62,31 @@ public class ClosedDayController {
 	public String doAddClosedDays() {
 		getClosedDayDAO().saveOrUpdateEntity(getClosedDays());
 		getRestaurantFinderController().addClosedDaysToRestaurant(getClosedDays());
-		return "editClosedDays";
+		setClosedDays(new DayRange());
+		return "addClosedDays";
 	}
 
 	public String editClosedDays() {
+		setClosedDays((DayRange) getClosedDayModel().getRowData());
 		return "editClosedDays";
+	}
+	
+	public String doEditClosedDays() {
+		getClosedDayDAO().saveOrUpdateEntity(getClosedDays());
+		setClosedDays(new DayRange());
+		return "addClosedDays";
+	}
+	
+	public String cancelEditClosedDays() {
+		setClosedDays(new DayRange());
+		return "addClosedDays";
 	}
 
 	public String deleteClosedDays() {
-		return "editClosedDays";
+		setClosedDays((DayRange) getClosedDayModel().getRowData());
+		DayRange currentClosedDays = getClosedDays();
+		restaurantFinderController.removeClosedDaysFromRestaurant(currentClosedDays);
+		getClosedDayDAO().deleteEntity(currentClosedDays);
+		return "addClosedDays";
 	}
-
 }

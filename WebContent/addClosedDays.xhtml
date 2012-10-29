@@ -4,7 +4,7 @@
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Edit Closed Days</title>
+	<title>Add Closed Days</title>
 </h:head>
 <h:body>
 	<h1>
@@ -49,7 +49,7 @@
 		</h:dataTable>
 	</h:form>
 
-	<h1>Edit Closed Days</h1>
+	<h1>Add Closed Days</h1>
 	<h:form>
 		<h:outputLabel for="start" value="Start Day:"></h:outputLabel>
 		<rich:calendar id="start" value="#{closedDayController.closedDays.startDay}"></rich:calendar>
@@ -61,8 +61,8 @@
 		<h:messages></h:messages>
 		<br></br>
 
-		<h:commandButton value="Save" action="#{closedDayController.doEditClosedDays}"></h:commandButton>
-		<h:commandButton value="Cancel" action="#{closedDayController.cancelEditClosedDays}"></h:commandButton>
+		<h:commandButton value="Add" action="#{closedDayController.doAddClosedDays}"></h:commandButton>
+		<h:commandButton value="Cancel" action="index"></h:commandButton>
 	</h:form>
 </h:body>
 </html>

@@ -20,6 +20,8 @@ public class DayRange implements Serializable {
 	private Date endDay;
 	
 	public DayRange() {
+		startDay = new Date();
+		endDay = new Date();
 	}
 
 	@Id

@@ -230,12 +230,18 @@ public class RestaurantFinderController {
 
 	public String addClosedDays() {
 		setRestaurant((Restaurant) getRestaurantModel().getRowData()); // get selected element
-		return "editClosedDays"; // proceed to editClosedDays.xhtml
+		return "addClosedDays"; // proceed to addClosedDays.xhtml
 	}
 
 	public void addClosedDaysToRestaurant(DayRange closedDays) {
 		Restaurant currentRestaurant = getRestaurant();
 		currentRestaurant.getClosedDays().add(closedDays);
 		getRestaurantDAO().saveOrUpdateEntity(currentRestaurant);	
+	}
+
+	public void removeClosedDaysFromRestaurant(DayRange closedDays) {
+		Restaurant currentRestaurant = getRestaurant();
+		currentRestaurant.getClosedDays().remove(closedDays);
+		getRestaurantDAO().saveOrUpdateEntity(currentRestaurant);
 	}
 }
