@@ -6,10 +6,10 @@
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Add Address</title>
+	<title>Add/Edit Address</title>
 </h:head>
 <h:body>
-	<h1>Add Address</h1>
+	<h1>Add/Edit Address</h1>
 	<h:form>
 
 		<h:outputLabel for="street" value="Street:"></h:outputLabel>
@@ -35,6 +35,7 @@
 		<h:outputLabel for="country" value="Country:"></h:outputLabel>
 		<h:inputText id="country"
 			value="#{restaurantFinderController.address.country}"></h:inputText>
+		<br></br>
 
 		<br></br>
 		<h:outputLabel for="latitude" value="Latitude:"></h:outputLabel>
@@ -46,10 +47,11 @@
 		<h:inputText id="longitude"
 			value="#{restaurantFinderController.address.longitude}"></h:inputText>
 
+
 		<br></br>
 		<br></br>
-		<h:commandButton value="Add"
-			action="#{restaurantFinderController.doAddAddress}"></h:commandButton>
+		<h:commandButton value="Update"
+			action="#{restaurantFinderController.doUpdateAddress}"></h:commandButton>
 		<h:commandButton value="Cancel" action="index"></h:commandButton>
 
 	</h:form>

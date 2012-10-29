@@ -186,15 +186,20 @@ public class RestaurantFinderController {
 		return "showRestaurant";
 	}
 
+	public String saveRestaurant() {
+		getRestaurantDAO().saveOrUpdateEntity(getRestaurant());
+		return "showRestaurant";
+	}
+
 	// // address methods
 
 	public String addAddress() {
 		setRestaurant((Restaurant) getRestaurantModel().getRowData());
 		setAddress(new Address());
-		return "addAddress"; // proceed to addAddress.xhtml
+		return "updateAddress"; // proceed to addAddress.xhtml
 	}
 
-	public String doAddAddress() {
+	public String doUpdateAddress() {
 		getAddressDAO().saveOrUpdateEntity(getAddress());
 		getRestaurant().setAddress(getAddress());
 		getRestaurantDAO().saveOrUpdateEntity(getRestaurant());
@@ -204,12 +209,7 @@ public class RestaurantFinderController {
 	public String editAddress() {
 		setRestaurant((Restaurant) getRestaurantModel().getRowData());
 		setAddress(getRestaurant().getAddress());
-		return "editAddress";
-	}
-
-	public String doEditAddress() {
-		getAddressDAO().saveOrUpdateEntity(getAddress());
-		return "index";
+		return "updateAddress";
 	}
 
 	// // contact info methods
