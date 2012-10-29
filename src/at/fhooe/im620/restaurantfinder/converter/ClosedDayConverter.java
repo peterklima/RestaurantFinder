@@ -27,7 +27,7 @@ public class ClosedDayConverter implements Converter {
 	@SuppressWarnings("unchecked")
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
-		List<DayRange> closedDayList = convertToSortedList((Set<DayRange>) value);
+		List<DayRange> closedDayList = (List<DayRange>) value;
 		String output = "";
 		if (closedDayList.isEmpty()) {
 			output = "<i>none</i><br />";

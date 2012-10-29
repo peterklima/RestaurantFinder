@@ -2,6 +2,7 @@ package at.fhooe.im620.restaurantfinder.converter;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -24,7 +25,7 @@ public class BusinessHourConverter implements Converter {
 	@SuppressWarnings("unchecked")
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
-		Set<BusinessHours> hours = (Set<BusinessHours>) value;
+		List<BusinessHours> hours = (List<BusinessHours>) value;
 		Map<Weekday, ArrayList<String>> hoursSorted = new EnumMap<Weekday, ArrayList<String>>(Weekday.class);
 		for (BusinessHours hour : hours) {
 			Weekday weekday = hour.getWeekday();

@@ -1,7 +1,9 @@
 package at.fhooe.im620.restaurantfinder.controller;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import javax.faces.convert.ConverterException;
 import javax.faces.model.DataModel;

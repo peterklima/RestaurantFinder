@@ -57,8 +57,6 @@ public class RestaurantFinderController {
 
 	// // getter and setters
 
-	// // getter and setters
-
 	public GenericDAO<Restaurant> getRestaurantDAO() {
 		return restaurantDAO;
 	}
@@ -234,6 +232,34 @@ public class RestaurantFinderController {
 	public DataModel<ContactInfo> getAllContactInfos() {
 		setContactInfoModel(new ListDataModel<ContactInfo>(getRestaurant().getContactInfos()));
 		return getContactInfoModel();
+	}
+
+	public String addContactInfo(){
+		setContactInfo(new ContactInfo());
+		return "addContactInfo"; // proceed to addContactInfo.xhtml
+	}
+
+	public String doAddContactInfo(){
+		getRestaurant().getContactInfos().add(getContactInfo());
+		getRestaurantDAO().saveOrUpdateEntity(getRestaurant());
+		return "showRestaurant"; // go back to index.xhtml
+	}
+
+	public String editContactInfo(){
+		setContactInfo(getContactInfoModel().getRowData()); // get selected element
+		return "editContactInfo";
+	}
+
+	public String doEditContactInfo(){
+		getRestaurantDAO().saveOrUpdateEntity(getRestaurant());
+		return "showRestaurant";
+	}
+
+	public String deleteContactInfo(){
+		setContactInfo(getContactInfoModel().getRowData()); // get selected element
+		getRestaurant().getContactInfos().remove(getContactInfo());
+		getRestaurantDAO().saveOrUpdateEntity(getRestaurant());
+		return "showRestaurant";
 	}
 
 	// // businessHours methods

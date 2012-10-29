@@ -60,18 +60,13 @@
 
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="PointsOutOfTen"></h:outputText>
+					<h:outputText value="Ratings"></h:outputText>
 				</f:facet>
-				<h:outputText value="#{entry.pointsOutOfTen}"></h:outputText>
-			</h:column>
-
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="PriceRangeOutOfThree"></h:outputText>
-				</f:facet>
+				<h:outputText value="#{entry.pointsOutOfTen}"></h:outputText> of 10
+				<br></br>
 				<c:forEach begin="1" end="#{entry.priceRangeOutOfThree}">
 					$
-				</c:forEach>
+				</c:forEach> of $$
 			</h:column>
 
 			<h:column>
