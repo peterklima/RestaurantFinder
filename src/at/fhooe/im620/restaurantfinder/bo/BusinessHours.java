@@ -22,6 +22,8 @@ public class BusinessHours implements Serializable {
 	private Time end;
 
 	public BusinessHours() {
+		start = new Time(7, 0);
+		end = new Time(12, 0);
 	}
 	
 	@Id

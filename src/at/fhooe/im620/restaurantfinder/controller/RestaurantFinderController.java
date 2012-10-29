@@ -225,6 +225,12 @@ public class RestaurantFinderController {
 		currentRestaurant.getHours().add(businessHour);
 		getRestaurantDAO().saveOrUpdateEntity(currentRestaurant);		
 	}
+
+	public void removeBusinessHourFromRestaurant(BusinessHours businessHour) {
+		Restaurant currentRestaurant = getRestaurant();
+		currentRestaurant.getHours().remove(businessHour);
+		getRestaurantDAO().saveOrUpdateEntity(currentRestaurant);
+	}
 	
 	// // closedDay methods
 

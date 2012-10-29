@@ -4,7 +4,7 @@
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Add Business Hours</title>
+	<title>Edit Business Hours</title>
 </h:head>
 <h:body>
 	<h1>
@@ -52,7 +52,7 @@
 		</h:dataTable>
 	</h:form>
 
-	<h1>Add Business Hour</h1>
+	<h1>Edit Business Hour</h1>
 	<h:form>
 		<h:outputLabel for="weekday" value="Weekday:"></h:outputLabel>
 		<h:selectOneMenu id="weekday" value="#{businessHourController.businessHour.weekday}">
@@ -69,7 +69,7 @@
 		<h:messages></h:messages>
 		<br></br>
 
-		<h:commandButton value="Add" action="#{businessHourController.doAddBusinessHour}"></h:commandButton>
+		<h:commandButton value="Save" action="#{businessHourController.doEditBusinessHour}"></h:commandButton>
 		<h:commandButton value="Cancel" action="index"></h:commandButton>
 	</h:form>
 </h:body>

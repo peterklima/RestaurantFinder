@@ -1,6 +1,7 @@
 package at.fhooe.im620.restaurantfinder.controller;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Set;
 
 import javax.faces.convert.ConverterException;
@@ -13,6 +14,8 @@ import at.fhooe.im620.restaurantfinder.bo.Weekday;
 import at.fhooe.im620.restaurantfinder.dao.GenericDAO;
 
 public class BusinessHourController {
+
+	private static final BusinessHourComparator businessHourComparator = new BusinessHourComparator();
 
 	private RestaurantFinderController restaurantFinderController;
 	private GenericDAO<BusinessHours> businessHourDAO;
@@ -37,7 +40,7 @@ public class BusinessHourController {
 	public RestaurantFinderController getRestaurantFinderController() {
 		return this.restaurantFinderController;
 	}
-	
+
 	public GenericDAO<BusinessHours> getBusinessHourDAO() {
 		return businessHourDAO;
 	}
@@ -83,11 +86,11 @@ public class BusinessHourController {
 		}
 		getBusinessHour().setStart(new Time(hour, minute));
 	}
-	
+
 	public String getStartTime() {
-		return "7:00";
+		return getBusinessHour().getStart().toString();
 	}
-	
+
 	public void setEndTime(String time) {
 		String[] token = time.split(":");
 		int hour = Integer.parseInt(token[0]);
@@ -97,45 +100,73 @@ public class BusinessHourController {
 		}
 		getBusinessHour().setEnd(new Time(hour, minute));
 	}
-	
+
 	public String getEndTime() {
-		return "12:00";
+		return getBusinessHour().getEnd().toString();
 	}
 
 	// // restaurant methods
 
 	public DataModel<BusinessHours> getAllBusinessHours() {
 		Set<BusinessHours> allEntities = getRestaurantFinderController().getRestaurant().getHours();
-		setBusinessHourModel(new ListDataModel<BusinessHours>(new ArrayList<BusinessHours>(allEntities)));
+		ArrayList<BusinessHours> businessHourList = new ArrayList<BusinessHours>(allEntities);
+		java.util.Collections.sort(businessHourList, businessHourComparator);
+		setBusinessHourModel(new ListDataModel<BusinessHours>(businessHourList));
 		return getBusinessHourModel();
 	}
 
 	public String doAddBusinessHour() {
-		getTimeDAO().saveOrUpdateEntity(getBusinessHour().getStart());
-		getTimeDAO().saveOrUpdateEntity(getBusinessHour().getEnd());
-		getBusinessHourDAO().saveOrUpdateEntity(getBusinessHour());
-		getRestaurantFinderController().addBusinessHourToRestaurant(getBusinessHour());
-		return "editBusinessHour";
+		BusinessHours currentBusinessHour = getBusinessHour();
+		getTimeDAO().saveOrUpdateEntity(currentBusinessHour.getStart());
+		getTimeDAO().saveOrUpdateEntity(currentBusinessHour.getEnd());
+		getBusinessHourDAO().saveOrUpdateEntity(currentBusinessHour);
+		getRestaurantFinderController().addBusinessHourToRestaurant(currentBusinessHour);
+		BusinessHours newBusinessHour = new BusinessHours();
+		newBusinessHour.setWeekday(currentBusinessHour.getWeekday());
+		setBusinessHour(newBusinessHour);
+		return "addBusinessHours";
 	}
 
 	public String editBusinessHour() {
 		setBusinessHour((BusinessHours) getBusinessHourModel().getRowData()); // get selected element
-		return "editBusinessHour";
+		return "editBusinessHours";
 	}
 
 	public String doEditBusinessHour() {
-		getBusinessHourDAO().saveOrUpdateEntity(getBusinessHour());
-		return "editBusinessHour";
+		BusinessHours currentBusinessHour = getBusinessHour();
+		getTimeDAO().saveOrUpdateEntity(currentBusinessHour.getStart());
+		getTimeDAO().saveOrUpdateEntity(currentBusinessHour.getEnd());
+		getBusinessHourDAO().saveOrUpdateEntity(currentBusinessHour);
+		setBusinessHour(new BusinessHours());
+		return "addBusinessHours";
+	}
+
+	public String cancelEditBusinessHour() {
+		setBusinessHour(new BusinessHours());
+		return "addBusinessHours";
 	}
 
 	public String deleteBusinessHour() {
 		setBusinessHour((BusinessHours) getBusinessHourModel().getRowData()); // get selected element
-		getBusinessHourDAO().deleteEntity(getBusinessHour());
-		return "index";
+		BusinessHours currentBusinessHour = getBusinessHour();
+		getRestaurantFinderController().removeBusinessHourFromRestaurant(currentBusinessHour);
+		getBusinessHourDAO().deleteEntity(currentBusinessHour);
+		getTimeDAO().deleteEntity(currentBusinessHour.getStart());
+		getTimeDAO().deleteEntity(currentBusinessHour.getEnd());
+		return "addBusinessHours";
 	}
 
-	public String showBusinessHour() {
-		setBusinessHour((BusinessHours) getBusinessHourModel().getRowData()); // get selected element
-		return "editBusinessHour";
+	static class BusinessHourComparator implements Comparator<BusinessHours> {
+		@Override
+		public int compare(BusinessHours hourA, BusinessHours hourB) {
+			int minutesA = toMinutesFromWeekStart(hourA);
+			int minutesB = toMinutesFromWeekStart(hourB);
+			return minutesA - minutesB;
+		}
+
+		private int toMinutesFromWeekStart(BusinessHours hour) {
+			Time start = hour.getStart();
+			return hour.getWeekday().ordinal() * 60 * 24 + start.getHour() * 60 + start.getMinute();
+		}
 	}
 }
