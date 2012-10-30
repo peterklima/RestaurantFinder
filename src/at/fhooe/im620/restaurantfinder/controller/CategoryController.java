@@ -1,5 +1,7 @@
 package at.fhooe.im620.restaurantfinder.controller;
 
+import java.util.List;
+
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
@@ -53,6 +55,16 @@ public class CategoryController {
 		return getCategoryModel();
 	}
 
+	public List<Category> getParentCategories() {
+		List<Category> categories = getCategoryDAO().getAllEntities();
+		Category element = new Category();
+		element.setId((long) 0);
+		element.setName("none");
+		element.setParentId((long) 0);
+		categories.add(0, element);
+		return categories;
+	}
+
 	public String addCategory() {
 		setCategory(new Category());
 		return "addCategory"; // proceed to addCategory.xhtml
@@ -60,28 +72,22 @@ public class CategoryController {
 
 	public String doAddCategory() {
 		getCategoryDAO().saveOrUpdateEntity(getCategory());
-		return "index"; // go back to index.xhtml
+		return addCategory();
 	}
 
 	public String editCategory() {
 		setCategory((Category) getCategoryModel().getRowData()); // get selected element
-		return "editCategory";
+		return "addCategory";
 	}
 
 	public String doEditCategory() {
 		getCategoryDAO().saveOrUpdateEntity(getCategory());
-		return "index";
+		return addCategory();
 	}
 
 	public String deleteCategory() {
 		setCategory((Category) getCategoryModel().getRowData()); // get selected element
 		getCategoryDAO().deleteEntity(getCategory());
-		return "index";
+		return "addCategory";
 	}
-
-	public String showCategory() {
-		setCategory((Category) getCategoryModel().getRowData()); // get selected element
-		return "showCategory";
-	}
-
 }

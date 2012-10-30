@@ -5,6 +5,7 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Edit Business Hours</title>
+	<link rel="stylesheet" href="style.css" />
 </h:head>
 <h:body>
 	<h1>
@@ -13,7 +14,7 @@
 		</h:outputFormat>
 	</h1>
 	<h:form>
-		<h:dataTable bgcolor="White" value="#{businessHourController.allBusinessHours}" var="entry" border="2">
+		<h:dataTable value="#{businessHourController.allBusinessHours}" var="entry" cellspacing="0" styleClass="businessHourList">
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Operation"></h:outputText>
@@ -70,7 +71,7 @@
 		<br></br>
 
 		<h:commandButton value="Save" action="#{businessHourController.doEditBusinessHour}"></h:commandButton>
-		<h:commandButton value="Cancel" action="index"></h:commandButton>
+		<h:commandButton value="Cancel" action="#{businessHourController.cancelEditBusinessHour}"></h:commandButton>
 	</h:form>
 </h:body>
 </html>

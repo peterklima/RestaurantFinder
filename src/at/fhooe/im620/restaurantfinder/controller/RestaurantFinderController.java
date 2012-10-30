@@ -317,4 +317,15 @@ public class RestaurantFinderController {
 		return "showRestaurant";
 	}
 
+	public String getTagsForEntry() {
+		List<Tag> tags = getRestaurantModel().getRowData().getTags();
+		if (tags.isEmpty()) {
+			return "";
+		}
+		String tagString = "";
+		for (Tag tag : tags) {
+			tagString += tag.getName() + ", ";
+		}
+		return tagString.substring(0, tagString.length() - 2);
+	}
 }

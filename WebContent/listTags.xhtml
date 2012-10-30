@@ -8,6 +8,7 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>RestaurantFinder v1</title>
+	<link rel="stylesheet" href="style.css" />
 </h:head>
 <h:body>
 	<h:form>
@@ -16,9 +17,7 @@
 		<h:commandButton value="Add Tags"
 			action="#{tagController.addTag}"></h:commandButton>
 
-		<h:dataTable bgcolor="White"
-			value="#{tagController.allTags}" var="entry"
-			border="2">
+		<h:dataTable value="#{tagController.allTags}" var="entry" cellspacing="0" styleClass="tagList">
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Operation"></h:outputText>

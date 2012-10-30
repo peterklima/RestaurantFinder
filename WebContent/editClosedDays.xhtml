@@ -5,6 +5,7 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Edit Closed Days</title>
+	<link rel="stylesheet" href="style.css" />
 </h:head>
 <h:body>
 	<h1>
@@ -13,7 +14,7 @@
 		</h:outputFormat>
 	</h1>
 	<h:form>
-		<h:dataTable bgcolor="White" value="#{closedDayController.allClosedDays}" var="entry" border="2">
+		<h:dataTable value="#{closedDayController.allClosedDays}" var="entry" cellspacing="0" styleClass="closedDayList">
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Operation"></h:outputText>

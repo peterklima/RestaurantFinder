@@ -1,0 +1,35 @@
+body {
+	background: #D4CFC7;
+}
+
+.restaurantList {
+	width: 100%;
+}
+
+.restaurantList,.businessHourList,.closedDayList,.tagList,.categoryList,.contactInfoList
+	{
+	border: 2px solid black;
+	background: #f0f0f0;
+}
+
+.restaurantList td,.restaurantList th,.businessHourList td,.businessHourList th,.closedDayList td,.closedDayList th,.tagList td,.tagList th,.categoryList td,.categoryList th,.contactInfoList td,.contactInfoList th
+	{
+	border: 1px solid black;
+}
+
+.restaurantList .id {
+	width: 20px;
+}
+
+.restaurantList .operation,.restaurantList .ratings,.restaurantList .category,.restaurantList .tags,.restaurantList .image
+	{
+	width: 140px;
+}
+
+.restaurantList .businessHours {
+	width: 250px;
+}
+
+.restaurantList .closedDays,.restaurantList .address {
+	width: 200px;
+}
