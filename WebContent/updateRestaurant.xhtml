@@ -11,6 +11,9 @@
 <h:body>
 	<h1>Add/Edit Restaurant</h1>
 	<h:form>
+		<h:messages />
+		<br></br>
+	
 		<h:outputLabel for="name" value="Name:"></h:outputLabel>
 		<h:inputText id="name"
 			value="#{restaurantFinderController.restaurant.name}"></h:inputText>
