@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -139,8 +140,8 @@ public class Restaurant implements Serializable {
 	}
 
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(cascade = CascadeType.ALL)
-	@Column(unique = false)
+	@ManyToMany(cascade = CascadeType.ALL)
+//	@Column(unique = false)
 	public List<Tag> getTags() {
 		return tags;
 	}
